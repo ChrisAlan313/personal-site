@@ -1,0 +1,58 @@
+/* General styling */
+
+:root {
+	--main-color: #93CCEA; /* cornflower blue */
+	--secondary-color: cornsilk; /* light blue */
+}
+
+html {
+	background: linear-gradient(var(--main-color), var(--secondary-color));
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+@media (min-width: 750px) {
+	#main-container {
+		width: 700px;
+	}
+}
+
+@media (max-width: 750px) {
+	#main-container {
+		width: 300px;
+	}
+}
+
+/* Main Body */
+
+#main-container {
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #abe6e3;
+	border: 1px solid #000000;
+	border-radius: 5px;
+}
+
+#header {
+	text-align: center;
+	color: #000000;
+	border-bottom: #000000 1px dotted;
+}
+
+/* Weather Alerts */
+
+#weatherContainer {
+	flex: 1;
+	gap: 10px;
+}
+
+.alertCard {
+	color: #000000;
+	border: #000000 1px dotted;
+}
+
+.alertTitle {
+	text-align: center;
+}
