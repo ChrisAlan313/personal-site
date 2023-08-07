@@ -1,23 +1,33 @@
-
-// Initial Setup
+/**
+ * Initial Setup
+ */
 
 'use strict';
 const parser = new DOMParser();
 
-// Elements
+/**
+ * Elements
+ */
 
-const getWeatherButton = document.getElementById('getWeather');
-const weatherContainer = document.getElementById('weatherContainer');
+const elements = {
+    getWeatherButton: document.getElementById('getWeather'),
+    weatherCardContainer: document.getElementById('weatherCardContainer'),
+};
 
-// Element Builders
+/**
+ * Element Builders
+ */
 
-const createWeatherAlertCard = (alertData) => {
+const createWeatherAlertCard = (alertData, index) => {
     const alertCard = `
-        <div class="alertCard">
+        <div id="alertCard-${index}" class="alertCard">
             <h3 class="alertTitle">${alertData.properties.event}</h3>
             <p class="alertArea">${alertData.properties.areaDesc}</p>
-            <p class="alertDescription">${alertData.properties.description}</p>
-            <p class="alertInstruction">${alertData.properties.instruction}</p>
+            <button type="button" id="expandDetailsButton-${index}">Expand details</button>
+            <div class="alertDetails" hidden>
+                <p class="alertDescription">${alertData.properties.description}</p>
+                <p class="alertInstruction">${alertData.properties.instruction}</p>
+            </div>
         </div>`;
 
     return parser.parseFromString(alertCard, 'text/html').body.firstChild;
@@ -27,19 +37,28 @@ const createErrorCard = (errorMessage) => {
     const errorCard = `
         <div id="errorCard">
             <p id="errorDescription">${errorMessage}</p>
-        </div>`
+        </div>`;
 
     return parser.parseFromString(errorCard, 'text/html').body.firstChild;
 };
 
-// Event Handlers
+/**
+ * Event Handlers
+ */
+
+const handleExpandDetailsClick = (event) => {
+    const currentBook = event.target.nextElementSibling.hidden;
+    event.target.nextElementSibling.hidden = !currentBook;
+};
 
 const handleGetWeatherClick = async () => {
-    const response = await fetch('https://api.weather.gov/alerts/active?area=FL');
+    const response = await fetch(
+        'https://api.weather.gov/alerts/active?area=FL'
+    );
 
     if (response.ok) {
-        getWeatherButton.disabled = true;
-        getWeatherButton.remove();
+        elements.getWeatherButton.disabled = true;
+        elements.getWeatherButton.remove();
 
         const data = await response.json();
 
@@ -47,7 +66,12 @@ const handleGetWeatherClick = async () => {
         // contain the weather alert data. We iterate over that to create the
         // alert cards from each.
         const alertCards = data.features.map(createWeatherAlertCard);
-        weatherContainer.append(...alertCards);
+        alertCards.map((alertCard, index) => {
+            elements.weatherCardContainer.append(alertCard);
+            document
+                .getElementById(`expandDetailsButton-${index}`)
+                .addEventListener('click', handleExpandDetailsClick);
+        });
     } else {
         if (document.getElementById('errorCard')) {
             document.getElementById('errorCard').remove();
@@ -56,10 +80,12 @@ const handleGetWeatherClick = async () => {
         const errorMessage = `An error has occured: ${response.status}`;
         const errorCard = createErrorCard(errorMessage);
 
-        weatherContainer.appendChild(errorCard);
+        elements.weatherCardContainer.appendChild(errorCard);
     }
 };
 
-// Event Listeners
+/**
+ * Event Listeners
+ */
 
-getWeatherButton.addEventListener('click', handleGetWeatherClick);
+elements.getWeatherButton.addEventListener('click', handleGetWeatherClick);

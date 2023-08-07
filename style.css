@@ -7,6 +7,8 @@
 
 html {
 	background: linear-gradient(var(--main-color), var(--secondary-color));
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 body {
@@ -43,16 +45,32 @@ body {
 
 /* Weather Alerts */
 
-#weatherContainer {
-	flex: 1;
+#weatherCardContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	gap: 10px;
 }
 
 .alertCard {
-	color: #000000;
+	background-color: #ffffff;
 	border: #000000 1px dotted;
+	border-radius: 15px;
+	width: 49%;
 }
 
 .alertTitle {
 	text-align: center;
+}
+
+.alertArea {
+	height: 100px;
+	text-overflow: ellipsis;
+}
+
+.content {
+	padding: 0 18px;
+	display: none;
+	overflow: hidden;
+	background-color: #f1f1f1;
 }
