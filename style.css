@@ -1,76 +1,76 @@
 /* General styling */
 
 :root {
-	--main-color: #93CCEA; /* cornflower blue */
-	--secondary-color: cornsilk; /* light blue */
+    --main-color: #93ccea; /* cornflower blue */
+    --secondary-color: cornsilk; /* light blue */
 }
 
 html {
-	background: linear-gradient(var(--main-color), var(--secondary-color));
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+    background: linear-gradient(var(--main-color), var(--secondary-color));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 @media (min-width: 750px) {
-	#main-container {
-		width: 700px;
-	}
+    #main-container {
+        width: 700px;
+    }
 }
 
 @media (max-width: 750px) {
-	#main-container {
-		width: 300px;
-	}
+    #main-container {
+        width: 300px;
+    }
 }
 
 /* Main Body */
 
 #main-container {
-	margin: 0 auto;
-	padding: 20px;
-	background-color: #abe6e3;
-	border: 1px solid #000000;
-	border-radius: 5px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #abe6e3;
+    border: 1px solid #000000;
+    border-radius: 5px;
 }
 
 #header {
-	text-align: center;
-	color: #000000;
-	border-bottom: #000000 1px dotted;
+    text-align: center;
+    color: #000000;
+    border-bottom: #000000 1px dotted;
 }
 
 /* Weather Alerts */
 
 #weatherCardContainer {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .alertCard {
-	background-color: #ffffff;
-	border: #000000 1px dotted;
-	border-radius: 15px;
-	width: 49%;
+    background-color: #ffffff;
+    border: #000000 1px dotted;
+    border-radius: 15px;
+    width: 49%;
 }
 
 .alertTitle {
-	text-align: center;
+    text-align: center;
 }
 
 .alertArea {
-	height: 100px;
-	text-overflow: ellipsis;
+    height: 100px;
+    text-overflow: ellipsis;
 }
 
 .content {
-	padding: 0 18px;
-	display: none;
-	overflow: hidden;
-	background-color: #f1f1f1;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
 }
